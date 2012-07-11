@@ -10,19 +10,8 @@ if (!function_exists('json_decode')) {
 /**
  * @author Chetan Bansal <chetan1@gmail.com>
  */
-class PopIt
+class PopItAPI
 {
-  /**
-   * Version.
-   */
-  const VERSION = 'v1';
-
-  /**
-   * Hostname of the host server
-   */
-  const HOSTNAME = "popit.mysociety.org";
-
-
   /**
    * Default options for curl.
    */
@@ -32,6 +21,16 @@ class PopIt
     CURLOPT_TIMEOUT        => 60,
     CURLOPT_USERAGENT      => 'popit-php-1.0',
   );
+
+  /**
+   * API Version.
+   */
+  protected $version;
+
+  /**
+   * Hostname of the host server
+   */
+  protected $hostName;
 
   /**
    * The Instance Name
@@ -66,6 +65,16 @@ class PopIt
    */
   public function __construct($config) {
 
+        if (!isset($config['hostName']))
+            throw new Exception('Error: NULL Host Name.');
+        else
+            $this->hostName = $config['hostName'];
+
+        if (!isset($config['version']))
+            $this->version = "v1";
+        else
+            $this->version = $config['version'];
+
         if (!isset($config['instanceName'])) {
             throw new Exception('Error: NULL Instance Name.');
         }
@@ -90,7 +99,7 @@ class PopIt
    * Set the API endpoint URL.
    */
   protected function setBaseUrl($instanceName) {
-    $this->baseURL = "http://$instanceName." . self::HOSTNAME . "/api/" . self::VERSION . "/";
+    $this->baseURL = "http://$instanceName." . $this->hostName . "/api/" . $this->version . "/";
   }
 
   /**
@@ -144,7 +153,6 @@ class PopIt
    * @return String the response text
    */
   protected function makeRequest($url, $method, $params) {
-
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
