@@ -48,7 +48,7 @@ To get all Items from a kind, use get([entity name]).
 
 ### …update something? ###
 
-To update data of an item, use update([entity name], [id], [updated date]).
+To update data of an item, use update([entity name], [id], [updated data]).
 
     $result = $popit->update("person", "4fe8b18dd4bd081b6b000204", array('name' => 'New name'));
     print_r(result);
