@@ -167,7 +167,6 @@ class PopItAPI
       default:
         $opts[CURLOPT_CUSTOMREQUEST] = $method;
     }
-
     if($method != "GET" && (!$this->user || !$this->password))
         throw new Exception('Error: Authentication Required, Username and/or password not set.');
     else
