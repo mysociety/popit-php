@@ -9,31 +9,31 @@ First, you'll need to import the PopIt class and instantiate it
 	require_once("popit.php");
 
     $popit = new PopIt(array(
-        'instanceName' => [Instance name],
-        'user' => [User Name],
-        'password' => [Password],
-        'hostName' => [Host name],
-        'version' => [API Version],
+        'instanceName' => 'Instance name',
+        'user' => 'User Name',
+        'password' => 'Password',
+        'hostName' => 'Host name',
+        'version' => 'API Version',
     ));
 
 * `instanceName` Name of the instance you created. There can be more than one for one installation.
-* `hostName` The Hostname of the PopIt server.
+* `hostName` The Hostname of the PopIt server, without http://.
 * `version` The version of the PopIt API. Since there may be changes in the way you access the data in PopIt you want to have a stable API version. We recommend that you use the latest version, if possible.
 * `user` Your username. You will not be able to add, update or delete anything if you haven't provided your username and password.
 * `password` The password for the user.
 
-### …create something? ###
+### create something? ###
 
-The SDK lets you easily create a new item by name. This can be a `person`, `organisation` or `position`. There may be other options that you can find in the [PopIt API documentation]().
+The SDK lets you easily create a new item by name. This can be a `persons`, `organizations` or `memberships`. There may be other options that you can find in the [PopIt API documentation]().
 
-    $person = $popit->add("person", array('name' => 'Test User'));
+    $person = $popit->add("persons", array('name' => 'Test User'));
     print_r($person);
 
 	// get the id of the newly created item
     $id = $person['_id'];
 
 
-### …read something ###
+### read something ###
 
 If you want to get a single item from PopIt, use get([entity name], [id])
 
@@ -43,23 +43,23 @@ If you want to get a single item from PopIt, use get([entity name], [id])
 
 To get all Items from a kind, use get([entity name]).
 
-    $result = $popit->get("person");
+    $result = $popit->get("persons");
     print_r($result);
 
-### …update something? ###
+### update something? ###
 
 To update data of an item, use update([entity name], [id], [updated data]).
 
-    $result = $popit->update("person", "4fe8b18dd4bd081b6b000204", array('name' => 'New name'));
+    $result = $popit->update("persons", "4fe8b18dd4bd081b6b000204", array('name' => 'New name'));
     print_r(result);
 
-### …delete something? ###
+### delete something? ###
 
 To delete an item, use delete([entity name], [id]).
 
-    $popit->delete("person", "4ffdfbcba90a340d49004796");
+    $popit->delete("persons", "4ffdfbcba90a340d49004796");
 
-### …get an error? ###
+### get an error? ###
 
 Check the exception message for the error details and trace.
 
