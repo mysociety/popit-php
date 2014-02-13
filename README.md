@@ -38,7 +38,7 @@ The SDK lets you easily create a new item by name. This can be a `persons`, `org
 If you want to get a single item from PopIt, use get([entity name], [id])
 
 	# you need a valid ID for example from the create process.
-    $result = $popit->get("person", "4ffdfbcba90a340d49004796");
+    $result = $popit->get("persons", "4ffdfbcba90a340d49004796");
     print_r($result);
 
 To get all Items from a kind, use get([entity name]).
